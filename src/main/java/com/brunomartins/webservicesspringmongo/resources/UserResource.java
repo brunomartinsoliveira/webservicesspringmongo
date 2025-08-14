@@ -1,6 +1,8 @@
 package com.brunomartins.webservicesspringmongo.resources;
 
 import com.brunomartins.webservicesspringmongo.domain.User;
+import com.brunomartins.webservicesspringmongo.services.UserServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +16,12 @@ import java.util.List;
 @RequestMapping(value="/users")
 public class UserResource {
 
+    @Autowired
+    private UserServices services;
+
     @GetMapping
     public ResponseEntity<List<User>> findAll()   {
-        User cristiano = new User("1", "Cristiano Ronaldo", "cristianoronaldo@gmail.com");
-        User messi = new User("2", "Lionel Messi", "lionelmessi@gmail.com");
-        List<User> list = new ArrayList<>();
-        list.addAll(Arrays.asList(cristiano, messi));
+        List<User> list = services.findAll();
         return ResponseEntity.ok().body(list);
     }
 }
