@@ -5,9 +5,8 @@ import com.brunomartins.webservicesspringmongo.dto.UserDTO;
 import com.brunomartins.webservicesspringmongo.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,10 +17,10 @@ public class UserResource {
     @Autowired
     private UserServices services;
 
-    @GetMapping
-    public ResponseEntity<List<UserDTO>> findAll()   {
+    @RequestMapping(method=RequestMethod.GET)
+    public ResponseEntity<List<UserDTO>> findAll() {
         List<User> list = services.findAll();
-        List<UserDTO> listDto = list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
+        List<UserDTO> listDto = list.stream().map(UserDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
 }
