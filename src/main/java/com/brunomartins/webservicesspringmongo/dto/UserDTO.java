@@ -1,10 +1,7 @@
 package com.brunomartins.webservicesspringmongo.dto;
 
 import com.brunomartins.webservicesspringmongo.domain.User;
-
 import java.io.Serializable;
-import java.util.List;
-import java.util.stream.Collector;
 
 public class UserDTO implements Serializable {
 
@@ -13,6 +10,12 @@ public class UserDTO implements Serializable {
     private String email;
 
     public UserDTO() {
+    }
+
+    public UserDTO(User obj) {
+        this.id = obj.getId();
+        this.name = obj.getName();
+        this.email = obj.getEmail();
     }
 
     public String getId() {
@@ -37,13 +40,5 @@ public class UserDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public UserDTO(User obj) {
-        this.id = obj.getId();
-        this.name = obj.getName();
-        this.email = obj.getEmail();
-
-
     }
 }

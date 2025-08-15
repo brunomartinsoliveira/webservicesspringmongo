@@ -6,7 +6,9 @@ import com.brunomartins.webservicesspringmongo.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,10 +19,11 @@ public class UserResource {
     @Autowired
     private UserServices services;
 
-    @RequestMapping(method=RequestMethod.GET)
-    public ResponseEntity<List<UserDTO>> findAll() {
-        List<User> list = services.findAll();
-        List<UserDTO> listDto = list.stream().map(UserDTO::new).collect(Collectors.toList());
-        return ResponseEntity.ok().body(listDto);
+    @RequestMapping(method=RequestMethod.POST)
+    public ResponseEntity<Void> Insert(@RequestBody UserDTO objDto) {
+        User obj = services.fromDTO(objDto);
+        obj = services.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
-}
+ }

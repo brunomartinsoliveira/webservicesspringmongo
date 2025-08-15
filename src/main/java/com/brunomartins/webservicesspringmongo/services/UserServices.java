@@ -18,26 +18,32 @@ public class UserServices {
     public List<User> findAll() {
         return repository.findAll();
     }
+
     public User findById(String id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado com id: " + id));
     }
+
     public User insert(User obj) {
-        return repository.save(obj);
+        return repository.insert(obj);
     }
+
     public void delete(String id) {
         findById(id); // Verifica se existe
         repository.deleteById(id);
     }
+
     public User update(User obj) {
         User newObj = findById(obj.getId());
         updateData(newObj, obj);
         return repository.save(newObj);
     }
+
     private void updateData(User newObj, User obj) {
         newObj.setName(obj.getName());
         newObj.setEmail(obj.getEmail());
     }
+
     public User fromDTO(UserDTO objDto) {
         return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
