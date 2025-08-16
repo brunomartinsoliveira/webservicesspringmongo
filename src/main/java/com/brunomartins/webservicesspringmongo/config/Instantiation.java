@@ -3,6 +3,7 @@ package com.brunomartins.webservicesspringmongo.config;
 import com.brunomartins.webservicesspringmongo.domain.Post;
 import com.brunomartins.webservicesspringmongo.domain.User;
 import com.brunomartins.webservicesspringmongo.dto.AuthorDTO;
+import com.brunomartins.webservicesspringmongo.dto.CommentDTO;
 import com.brunomartins.webservicesspringmongo.repository.PostRepository;
 import com.brunomartins.webservicesspringmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,12 @@ public class Instantiation implements CommandLineRunner {
         Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para Sao Paulo. Abracos!",new AuthorDTO(maria));
         Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
 
+        CommentDTO c1 = new CommentDTO("Bom jogo mano!", sdf.parse("21/03/2018"), new AuthorDTO());
+        CommentDTO c2 = new CommentDTO("Obrigado", sdf.parse("21/03/2018"), new AuthorDTO());
+        CommentDTO c3 = new CommentDTO("Tamo junto!", sdf.parse("21/03/2018"), new AuthorDTO());
+
+        post1.getComments().addAll(Arrays.asList(c1, c2));
+        post2.getComments().addAll(Arrays.asList(c3));
 
         postRepository.saveAll(Arrays.asList(post1, post2));
 
