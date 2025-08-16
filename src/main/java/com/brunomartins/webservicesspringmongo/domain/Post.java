@@ -1,5 +1,6 @@
 package com.brunomartins.webservicesspringmongo.domain;
 
+import com.brunomartins.webservicesspringmongo.dto.AuthorDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,19 +11,18 @@ import java.util.Objects;
 
 @Document
 public class Post implements Serializable {
-    private static final long serialVersionUID = 1L;
 
     @Id
     private String id;
     private Data date;
     private String title;
     private String body;
-    private User author;
+    private AuthorDTO author;
 
-    public Post(String id, Date parse, String partiuViagem, String s, User maria)   {
+    public Post(String id, Date parse, String title, String body, AuthorDTO author)   {
     }
 
-    public Post(String id, String body, String title, Data date, User author) {
+    public Post(String id, String body, String title, Data date, AuthorDTO author) {
         this.id = id;
         this.body = body;
         this.title = title;
@@ -62,11 +62,11 @@ public class Post implements Serializable {
         this.date = date;
     }
 
-    public User getAuthor() {
+    public AuthorDTO getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(AuthorDTO author) {
         this.author = author;
     }
 

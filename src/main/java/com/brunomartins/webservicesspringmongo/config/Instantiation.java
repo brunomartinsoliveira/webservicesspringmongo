@@ -2,6 +2,7 @@ package com.brunomartins.webservicesspringmongo.config;
 
 import com.brunomartins.webservicesspringmongo.domain.Post;
 import com.brunomartins.webservicesspringmongo.domain.User;
+import com.brunomartins.webservicesspringmongo.dto.AuthorDTO;
 import com.brunomartins.webservicesspringmongo.repository.PostRepository;
 import com.brunomartins.webservicesspringmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class Instantiation implements CommandLineRunner {
     private UserRepository userRepository;
 
     @Autowired
-    private PostRepository postRepository; // ⚠️ use minúsculo, por convenção e consistência
+    private PostRepository postRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -28,16 +29,18 @@ public class Instantiation implements CommandLineRunner {
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         userRepository.deleteAll();
-        postRepository.deleteAll(); // ✅ Agora usa o repositório injetado corretamente
+        postRepository.deleteAll();
 
         User maria = new User(null, "Maria Brown", "maria@gmail.com");
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
-        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para Sao Paulo. Abracos!", maria);
-        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", maria);
-
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
-        postRepository.saveAll(Arrays.asList(post1, post2)); // ⚠️ saveAll em vez de save
+
+        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para Sao Paulo. Abracos!",new AuthorDTO(maria));
+        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
+
+
+        postRepository.saveAll(Arrays.asList(post1, post2));
     }
 }
