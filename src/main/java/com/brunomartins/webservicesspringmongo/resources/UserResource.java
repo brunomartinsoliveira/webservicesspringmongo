@@ -1,5 +1,6 @@
 package com.brunomartins.webservicesspringmongo.resources;
 
+import com.brunomartins.webservicesspringmongo.domain.Post;
 import com.brunomartins.webservicesspringmongo.domain.User;
 import com.brunomartins.webservicesspringmongo.dto.UserDTO;
 import com.brunomartins.webservicesspringmongo.services.UserServices;
@@ -53,5 +54,10 @@ public class UserResource {
         obj.setId(id);
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 }
