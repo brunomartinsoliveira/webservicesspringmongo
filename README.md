@@ -9,7 +9,7 @@ Webservicesspringmongo é uma aplicação backend que consiste em um sistema de 
 ## Back end
 - Java
 - Spring Boot
-- JPA / Hibernate
+- MongoDB
 - Maven
 
 # Como executar o projeto
