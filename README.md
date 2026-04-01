@@ -27,6 +27,6 @@ cd backend
 # executar o projeto
 ./mvnw spring-boot:run
 ```
-https://www.linkedin.com/in/brunomartinsfisio/
+https://www.linkedin.com/in/brunooliveiradev/
 
 Bruno Martins de Oliveira
