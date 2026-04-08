@@ -14,7 +14,7 @@ Webservicesspringmongo é uma aplicação backend que consiste em um sistema de 
 
 # Como executar o projeto
 
-## Back end
+## Backend
 Pré-requisitos: Java 11
 
 ```bash
