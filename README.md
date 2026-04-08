@@ -8,7 +8,7 @@ Webservicesspringmongo é uma aplicação backend que consiste em um sistema de 
 # Tecnologias utilizadas
 ## Back end
 - Java
-- Spring Boot
+- SpringBoot
 - MongoDB
 - Maven
 
